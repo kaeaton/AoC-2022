@@ -22,11 +22,11 @@ fun main() {
 								  "C Z" to 6)
 		
 		input.forEach {
-			if(winningCombos.containsKey(it) == true) {
-				score += winningCombos[it]
+			if(winningCombos.containsKey(it)) {
+				score += winningCombos[it]!!
 			} else {
 				val elementPlayed = it.split(" ")[1]
-				score += responseValues[elementPlayed]
+				score += responseValues[elementPlayed]!!
 			}
 		}
 	
@@ -34,14 +34,53 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+		var score = 0
+
+		val actionValues = mapOf("X" to 0,
+								 "Y" to 3,
+								 "Z" to 6)
+
+		val rockValues = mapOf("X" to "scissors",
+							   "Y" to "rock",
+							   "Z" to "paper")
+
+		val paperValues = mapOf("X" to "rock",
+								"Y" to "paper",
+								"Z" to "scissors")
+
+		val scissorValues = mapOf("X" to "paper",
+								  "Y" to "scissors",
+								  "Z" to "rock")
+
+		val elements = mapOf("A" to rockValues,
+							 "B" to paperValues,
+							 "C" to scissorValues)
+
+		val elementValues = mapOf("rock" to 1,
+								  "paper" to 2,
+								  "scissors" to 3)
+
+
+		input.forEach {
+			val round = it.split(" ")
+
+			// Did they play rock paper or scissors?
+			val yourResponseLookUpTable = elements[round[0]]!!
+
+			// what were you supposed to play in response?
+			val yourResponse = yourResponseLookUpTable[round[1]]
+
+			score += elementValues[yourResponse]!!
+			score += actionValues[round[1]]!!
+		}
+        return score
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+//    val testInput = readInput("Day01_test")
+//    check(part1(testInput) == 1)
 
-    val input = readInput("Day01")
+    val input = readInput("input_2a")
     println(part1(input))
     println(part2(input))
 }

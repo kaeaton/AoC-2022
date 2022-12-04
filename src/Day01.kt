@@ -2,7 +2,6 @@ fun main() {
     fun part1(input: List<String>): Int {
         var maxCalories = 0
         var currentCalories = 0
-        val input = readInput("input_1a")
         input.forEach {
             if(it.isNotEmpty()) {
                 currentCalories += it.toInt()
@@ -19,7 +18,6 @@ fun main() {
     fun part2(input: List<String>): Int {
         var maxCalories = ArrayList<Int>()
         var currentCalories = 0
-        val input = readInput("input_1a")
         input.forEach {
             if(it.isNotEmpty()) {
                 currentCalories += it.toInt()
@@ -34,7 +32,7 @@ fun main() {
         return maxCalories.slice(0..2).sum()
     }
 
-    val input = readInput("input_1a")
+    val input = readInput("input_1")
     println(part1(input))
     println(part2(input))
 }
